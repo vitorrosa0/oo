@@ -25,6 +25,7 @@ class Livros:
         return self.__nomeAutor
 
 
+    # Modifique a função ler_livros da classe Livros conforme abaixo
     def ler_livros(self):
     # Ler informações dos livros do arquivo livros.txt
         livros = []
@@ -54,6 +55,7 @@ class Livros:
                         print(f"A linha de livro não possui informações suficientes: {line}")
 
         return livros
+
 
     def atualizar_status_livro(self, codigo_livro, disponivel):
         # Atualizar o status de disponibilidade do livro no arquivo livros.txt

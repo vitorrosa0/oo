@@ -35,9 +35,6 @@ def main():
     else:
         novo_usuario.criar_usuario()
         
-    print(f"Tipo: {novo_usuario.getTipo()}")
-    print(f"Codigo: {novo_usuario.getCodigo()}")
-    
     if novo_usuario.getTipo() == 'Cliente':
         menu = Menu()
         menu.menu_cliente(novo_usuario, emprestimo)

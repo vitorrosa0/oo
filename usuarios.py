@@ -107,7 +107,10 @@ class Usuario:
                 # Verifica se a lista tem pelo menos 5 elementos antes de acessar os índices 3 e 4 (login e senha)
                 if len(dados_usuario) >= 5 and dados_usuario[3] == login and dados_usuario[4] == senha:
                     print("Login bem-sucedido!")
+                    self.setNome(dados_usuario[1])
+                    print(f"Bem vindo, {self.getNome()}!")
                     self.setCodigo(dados_usuario[0])
+                    
                     tipo_usuario = dados_usuario[2]
                     self.setTipo(tipo_usuario)
                     self.setTentativasLogin(0)  # Reinicia o contador após um login bem-sucedido

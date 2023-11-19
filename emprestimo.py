@@ -1,6 +1,8 @@
 from datetime import datetime
 from livros import Livros
 from usuarios import Usuario
+import random
+import string
 class Emprestimo:
     
     contador_emprestimo = 1
@@ -42,15 +44,14 @@ class Emprestimo:
 
     def realizar_emprestimo(self, usuario):
         livros = Livros(codigoLivro="", nomeLivro="", nomeAutor="")
-        livros_disponiveis = livros.ler_livros()
+        livros_info = livros.ler_livros()  # Usamos apenas a lista de livros
+
         codigo_cliente = usuario.getCodigo()
-        
         usuario_emprestimo = Usuario(codigo="", nome="", tipo="", login="", senha="")
         usuario_emprestimo.setCodigo(codigo_cliente)
-        
         self.setUsuario(usuario_emprestimo)
 
-        if not livros_disponiveis:
+        if not livros_info:
             print("Não há livros disponíveis para empréstimo.")
             return
 
@@ -58,8 +59,9 @@ class Emprestimo:
 
         while not emprestimo_realizado:
             print("Livros Disponíveis:")
-            for livro in livros_disponiveis:
-                print(f"Código: {livro[0]}, Título: {livro[1]}, Autor: {livro[2]}")
+            for livro in livros_info:
+                disponibilidade = "Disponível" if livro[3] else "Indisponível"
+                print(f"Código: {livro[0]}, Título: {livro[1]}, Autor: {livro[2]}, Disponibilidade: {disponibilidade}")
 
             codigo_livro = input("Informe o código do livro que deseja emprestar: ")
 
@@ -80,25 +82,52 @@ class Emprestimo:
                 emprestimo_realizado = True
 
             else:
-                codigo_cliente = usuario.getCodigo()
-                data_emprestimo = datetime.now().strftime("%Y-%m-%d")
-                emprestimo = f"{self.gerar_codigo_emprestimo()},{codigo_cliente},{codigo_livro},{data_emprestimo}\n"
+                # Verifica se o livro está disponível antes de realizar o empréstimo
+                livro_disponivel = False
+                for livro_info in livros_info:
+                    if livro_info[0] == codigo_livro and livro_info[3]:  # Verifica se o livro está disponível
+                        livro_disponivel = True
+                        break
 
-                with open("dados/emprestimos.txt", "a") as file:
-                    file.write(emprestimo)
+                if livro_disponivel:
+                    data_emprestimo = datetime.now().strftime("%Y-%m-%d")
+                    emprestimo = f"{self.gerar_codigo_emprestimo()},{codigo_cliente},{codigo_livro},{data_emprestimo}\n"
 
-                print("Empréstimo realizado com sucesso!")
+                    with open("dados/emprestimos.txt", "a") as file:
+                        file.write(emprestimo)
 
-                emprestimo_realizado = True
+                    print("Empréstimo realizado com sucesso!")
 
-    # (Mantenha as demais funções como estão)
+                    # Atualiza o arquivo livros.txt após o empréstimo
+                    with open("dados/livros.txt", "w") as livros_file:
+                        for livro_info in livros_info:
+                            if livro_info[0] == codigo_livro:
+                                livros_file.write(f"{livro_info[0]},{livro_info[1]},{livro_info[2]},{False}\n")
+                            else:
+                                livros_file.write(f"{livro_info[0]},{livro_info[1]},{livro_info[2]},{livro_info[3]}\n")
 
-    def verificar_livro_disponivel(self, codigo_livro, codigo_cliente_atual):
-        codigo_cliente = self.verificar_livro_ja_emprestado(codigo_cliente_atual, codigo_livro)
-        return codigo_cliente is None or codigo_cliente == codigo_cliente_atual
+                    emprestimo_realizado = True
+                else:
+                    print("Livro não disponível para empréstimo.")
+                    escolha = input("Deseja escolher outro livro? (s/n): ").lower()
+                    emprestimo_realizado = escolha != 's'
+    
+    def verificar_livro_disponivel(self, codigo_cliente, codigo_livro):
+        status_livro = self.verificar_livro_ja_emprestado(codigo_cliente, codigo_livro)
 
-    # def verificar_livro_disponivel(self, codigo_livro, livros_disponiveis):
-    #     return codigo_livro in [livro[0] for livro in livros_disponiveis] and not self.verificar_livro_ja_emprestado(codigo_livro)
+        if status_livro == "livre":
+            return True
+        elif status_livro == "alugado_por_usuario_atual":
+            print("Você já possui este livro emprestado.")
+            return False
+        elif status_livro == "alugado_por_outro_usuario":
+            print("Livro já emprestado para outra pessoa.")
+            return False
+        else:
+            print("Ocorreu um erro ao verificar a disponibilidade do livro.")
+            return False
+
+    
 
     def verificar_livro_ja_emprestado(self, codigo_cliente, codigo_livro):
         try:
@@ -141,10 +170,11 @@ class Emprestimo:
 
         return False
 
-    def gerar_codigo_emprestimo(self):
-        codigo_emprestimo = Emprestimo.contador_emprestimo
-        Emprestimo.contador_emprestimo += 1
-        return str(codigo_emprestimo)
+    @staticmethod
+    def gerar_codigo_emprestimo(tamanho=8):
+        parte_alfanumerica = ''.join(random.choices(string.ascii_uppercase + string.digits, k=tamanho))
+        codigo_emprestimo = f"EMPRESTIMO-{parte_alfanumerica}"
+        return codigo_emprestimo
 
 
     def emprestimos_do_cliente(self, usuario):
