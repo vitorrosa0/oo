@@ -23,7 +23,7 @@
 23, Anjos e Demonios, Dan Brown,True
 24, As Aventuras de Pinoquio, Carlo Collodi,True
 25, Seus Pontos Fracos, Wayne Dyer,True
-26, Caim e Abel, Jeffrey Archer,True
+26, Caim e Abel, Jeffrey Archer,False
 27, Diario de Anne Frank, Anne Frank,False
 28, Os Homens que Nao Amavam as Mulheres, Stieg Larsson,True
 29, Uma Lagarta Muito Comilona, Eric Carle,False

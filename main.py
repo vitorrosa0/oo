@@ -1,10 +1,14 @@
 from usuarios import Usuario
 from livros import Livros
 from emprestimo import Emprestimo
-from menu import Menu
+from menus import Menu
+from tkinter import *
+
+
 def main():
     novo_usuario = Usuario(codigo="", nome="", tipo="", login="", senha="")
     emprestimo = Emprestimo(codigoEmprestimo="", codigoCliente="", codigoLivro="", dataEmprestimo="")
+    
     
     print("****Bem-vindo(a) a BookStack Innovations!****\n")
     
@@ -19,9 +23,12 @@ def main():
         autenticado = False
         
         while tentativas_login < 3 and not autenticado:
-            novo_usuario.fazer_login()
+            login_resultado = novo_usuario.fazer_login()
             
-            if novo_usuario.getTipo() == 'Cliente':
+            if login_resultado:
+                novo_usuario = login_resultado
+            
+            if novo_usuario and novo_usuario.getTipo() == 'Cliente':
                 autenticado = True
                 tentativas_login = 0
             else:
@@ -31,17 +38,20 @@ def main():
         if not autenticado:
             print("\n****Número máximo de tentativas atingido. Considere criar um novo usuário.****")
             novo_usuario.criar_usuario()
-
+            novo_usuario.fazer_login()
+            
     else:
         novo_usuario.criar_usuario()
+        novo_usuario.fazer_login()
         
-    if novo_usuario.getTipo() == 'Cliente':
-        menu = Menu()
-        menu.menu_cliente(novo_usuario, emprestimo)
+    print(f"Tipo de novo_usuario: {type(novo_usuario)}")
+    if isinstance(novo_usuario, Usuario) and   novo_usuario.getTipo() == 'Cliente':
+       menu = Menu(usuario = novo_usuario)
+       menu.menu_cliente(novo_usuario, emprestimo)
+       
         
-    
-        
-        
+    else:
+        print("Erro: novo_usuario não é do tipo cliente")
         
         
 if __name__ == "__main__":

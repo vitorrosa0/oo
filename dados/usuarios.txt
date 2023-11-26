@@ -1,2 +1,6 @@
 
 10,Vitor,Cliente,vitorrosa,senha123
+1,Lucas,Cliente,lucas14,lfc
+110,Jonas,Cliente,jonas90,senha123
+101,Camilo,Cliente,camilo10,camilo30
+405,Otavio,Cliente,otavio1,9090

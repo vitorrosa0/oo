@@ -50,6 +50,7 @@ class Menu:
                     if lo == 's':
                         usuario.logout()
                         print("Saindo da conta. Até logo!")
+                        
                     elif lo == 'n':
                         print("Retornando ao menu do cliente.")
                         self.menu_cliente(usuario,emprestimo)

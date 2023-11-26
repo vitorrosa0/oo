@@ -95,7 +95,8 @@ class Usuario:
                                 f"{novo_usuario.__login},{novo_usuario.__senha}\n"
             file.write(novo_usuario_info)
 
-        print("Usuário criado com sucesso!")
+        
+        print("\nUsuário criado com sucesso!\n")
 
     def fazer_login(self):
         login = input("Informe o login: ")
@@ -134,16 +135,3 @@ class Usuario:
         print("Logout realizado com sucesso.")
         
     
-# Exemplo de uso
-
-# novo_usuario.criar_usuario()
-
-# # Chamando a função login com login e senha
-# novo_usuario_login = Usuario(codigo=novo_usuario.getCodigo(), nome=novo_usuario.getNome(),
-#                              tipo=novo_usuario.getTipo(), login=novo_usuario.getLogin(),
-#                              senha=novo_usuario.getSenha())
-# novo_usuario_login.login()
-# novo_usuario_login.logout()
-
-
-
