@@ -1,14 +1,14 @@
-01, O Alquimista, Paulo Coelho,True
+01, O Alquimista, Paulo Coelho,False
 02, O Pequeno Principe, Antonie de Saint-Exupery,True
 03, Harry Potter e a Pedra Filosofal, J.K. Rowling,True
 04, O Senhor dos Aneis, J.R.R. Tolkien,True
 05, O Codigo Da Vinci, Dan Brown,True
 06, Ben-Hur: Uma Historia dos Tempos de Cristo, Lew Wallace,True
-07, O Apanhador no Campo de Centeio, J.D. Salinger,True
+07, O Apanhador no Campo de Centeio, J.D. Salinger,False
 08, O Hobbit, J.R.R. Tolkien,True
 09, Don Quixote, Miguel de Cervantes,True
-10, Um Conto de Duas Cidades, Charles Dickens,True
-11, O Sonho da Camara Vermelha, Cao Xueqin,True
+10, Um Conto de Duas Cidades, Charles Dickens,False
+11, O Sonho da Camara Vermelha, Cao Xueqin,False
 12, Harry Potter e o Prisioneiro de Azkaban, J.K. Rowling,True
 13, Cem Anos de Solidao, Gabriel Garcia Marquez,True
 14, Lolita, Vladimir Nabokov,True
@@ -18,13 +18,13 @@
 18, As Pontes de Madison, Robert James Waller,True
 19, A Historia do Pedro Coelho, Beatrix Potter,True
 20, Cinquenta Tons de Cinza, E. L. James,True
-21, Mensagem a Garcia, Elbert Hubbard,False
+21, Mensagem a Garcia, Elbert Hubbard,True
 22, O Jardim dos Esquecidos, V. C. Andrews,True
 23, Anjos e Demonios, Dan Brown,True
 24, As Aventuras de Pinoquio, Carlo Collodi,True
 25, Seus Pontos Fracos, Wayne Dyer,True
-26, Caim e Abel, Jeffrey Archer,False
+26, Caim e Abel, Jeffrey Archer,True
 27, Diario de Anne Frank, Anne Frank,False
 28, Os Homens que Nao Amavam as Mulheres, Stieg Larsson,True
-29, Uma Lagarta Muito Comilona, Eric Carle,False
+29, Uma Lagarta Muito Comilona, Eric Carle,True
 30, The Revolt of Mamie Stover, William Bradford Huie,False

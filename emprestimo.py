@@ -44,7 +44,7 @@ class Emprestimo:
 
     def realizar_emprestimo(self, usuario):
         livros = Livros(codigoLivro="", nomeLivro="", nomeAutor="")
-        livros_info = livros.ler_livros()  # Usamos apenas a lista de livros
+        livros_info = livros.ler_livros()  
 
         codigo_cliente = usuario.getCodigo()
         usuario_emprestimo = Usuario(codigo="", nome="", tipo="", login="", senha="")
@@ -65,7 +65,7 @@ class Emprestimo:
 
             codigo_livro = input("Informe o código do livro que deseja emprestar: ")
 
-            # Substitua a chamada da função original pela nova função
+            
             status_livro = self.verificar_livro_ja_emprestado(codigo_cliente, codigo_livro)
 
             if not self.verificar_livro_disponivel(codigo_cliente, codigo_livro):
@@ -82,10 +82,10 @@ class Emprestimo:
                 emprestimo_realizado = True
 
             else:
-                # Verifica se o livro está disponível antes de realizar o empréstimo
+               
                 livro_disponivel = False
                 for livro_info in livros_info:
-                    if livro_info[0] == codigo_livro and livro_info[3]:  # Verifica se o livro está disponível
+                    if livro_info[0] == codigo_livro and livro_info[3]:  
                         livro_disponivel = True
                         break
 
@@ -98,7 +98,7 @@ class Emprestimo:
 
                     print("Empréstimo realizado com sucesso!")
 
-                    # Atualiza o arquivo livros.txt após o empréstimo
+                    
                     with open("dados/livros.txt", "w") as livros_file:
                         for livro_info in livros_info:
                             if livro_info[0] == codigo_livro:
@@ -203,8 +203,8 @@ class Emprestimo:
             print(f"Ocorreu um erro ao processar os empréstimos: {e}")
 
         if emprestimos_cliente:
-            print()
-            print(f"Empréstimos do cliente {codigo_cliente}:")
+            
+            print(f"\nEmpréstimos do cliente {codigo_cliente}:")
             for emprestimo_info in emprestimos_cliente:
                 print(f"Código do Empréstimo: {emprestimo_info['codigo_emprestimo']}")
                 print(f"Código do Livro: {emprestimo_info['codigo_livro']}")

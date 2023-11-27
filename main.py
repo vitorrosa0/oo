@@ -2,7 +2,7 @@ from usuarios import Usuario
 from livros import Livros
 from emprestimo import Emprestimo
 from menus import Menu
-from tkinter import *
+
 
 
 def main():
@@ -44,7 +44,7 @@ def main():
         novo_usuario.criar_usuario()
         novo_usuario.fazer_login()
         
-    print(f"Tipo de novo_usuario: {type(novo_usuario)}")
+    
     if isinstance(novo_usuario, Usuario) and   novo_usuario.getTipo() == 'Cliente':
        menu = Menu(usuario = novo_usuario)
        menu.menu_cliente(novo_usuario, emprestimo)

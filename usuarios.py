@@ -72,8 +72,12 @@ class Usuario:
         nome = input("Informe o nome do usuário: ").capitalize()
         self.setNome(nome)
         tipo = input("Informe o tipo do usuário (Cliente ou Bibliotecario): ").capitalize()
-        self.setTipo(tipo)
         
+        while tipo != 'Cliente' and tipo != 'Bibliotecario':
+            print("\nPor favor, digite Cliente ou Bibliotecário!")
+            tipo = input("Informe o tipo do usuário (Cliente ou Bibliotecario): ").capitalize()
+            
+        self.setTipo(tipo)
         login = input("Informe o login do usuário: ")
         
         # Verifica se já existe um usuário com o mesmo login
@@ -118,9 +122,9 @@ class Usuario:
                     return self
 
         print("Login falhou. Verifique seu login e senha.")
-        tentativas = self.getTentativasLogin() + 1  # Incrementa o contador de tentativas de login falhas
+        tentativas = self.getTentativasLogin() + 1  
         self.setTentativasLogin(tentativas)
-        #print(f"Tentativas restantes: {3 - tentativas}")
+        
         
         return None
         
